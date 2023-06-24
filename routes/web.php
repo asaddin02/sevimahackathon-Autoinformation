@@ -15,10 +15,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', function () {
+    return view('welcome');
+});
+
 // Route::get('/', function () {
-//     return view('welcome');
+//     Artisan::call('inspire');
+//     $quote = trim(Artisan::output());
+
+//     // return view('quote', ['quote' => $quote]);
+//     dd($quote);
 // });
-Route::get('/', [AutoaiController::class,'index']);
+
+Route::get('/ai', [AutoaiController::class,'index']);
 
 Auth::routes();
 
