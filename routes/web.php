@@ -28,7 +28,7 @@ Route::get('/', function () {
 // });
 
 Route::post('/quote', [AutoaiController::class,'index'])->name('quote.index');
-Route::post('/schedule', [AutoaiController::class,'scedule'])->name('schedule.random');
+Route::post('/schedule', [AutoaiController::class,'schedule'])->name('schedule.random');
 Route::post('/task', [AutoaiController::class,'task'])->name('task.random');
 
 Auth::routes();

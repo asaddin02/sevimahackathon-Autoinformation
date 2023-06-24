@@ -102,10 +102,10 @@
                         <div class="portfolio-info">
                             <h4>Qutoes</h4>
                             <p>Click to get quotes</p>
-                            <form>
+                            <form action="{{ route('quote.index') }}" method="post">
                                 @csrf
                                 <input type="hidden" name="quote" value="quote">
-                                <button id="quotes" type="button"
+                                <button id="quotes" type="submit"
                                     class="border-0 bg-white portfolio-lightbox preview-link" title="Qutoes"><i
                                         class="bx bx-right-arrow-circle"></i></button>
                             </form>
@@ -117,11 +117,11 @@
                         <div class="portfolio-info">
                             <h4>Automated Schedule</h4>
                             <p>Click to get new schedule</p>
-                            <form>
+                            <form action="{{ route('schedule.random') }}" method="post">
                                 @csrf
                                 <input type="hidden" name="schedule"
-                                    value="Provide a random schedule of classes for high school students in Indonesia">
-                                <button id="newschedule" type="button"
+                                    value="Please generate a sample schedule of classes for a high school (SMA) in Indonesia. The subjects to include are Mathematics, Civic Education (PKN), Economics, Biology, English, Indonesian Language, Social Sciences, History, Religion, Chemistry, Physics, and Physical Education (Olahraga). The schedule should cover Monday to Friday, and each day should have a different variation of the schedule. I would like the schedule to be well-organized, with consistent class durations and breaks in between classes">
+                                <button id="newschedule" type="submit"
                                     class="border-0 bg-white portfolio-lightbox preview-link" title="Qutoes"><i
                                         class="bx bx-right-arrow-circle"></i></button>
                             </form>
@@ -133,11 +133,11 @@
                         <div class="portfolio-info">
                             <h4>Task Manager</h4>
                             <p>Click to get new daily task</p>
-                            <form>
+                            <form action="{{ route('task.random') }}" method="post">
                                 @csrf
                                 <input type="hidden" name="task"
                                     value="Provide me with an ideal daily task schedule for a teacher working from 6 AM to 4 PM">
-                                <button id="newschedule" type="button"
+                                <button id="newschedule" type="submit"
                                     class="border-0 bg-white portfolio-lightbox preview-link" title="Qutoes"><i
                                         class="bx bx-right-arrow-circle"></i></button>
                             </form>
@@ -159,7 +159,13 @@
                 {{-- Response --}}
                 <div class="row">
                     <div class="col-lg-12 col-md-6">
-                        <textarea id="textarea" class="textarea form-control" readonly>Response:</textarea>
+                        @if (isset($quote))
+                            <textarea id="textarea" class="textarea form-control" readonly>Response: {{ $quote }}</textarea>
+                        @elseif(isset($schedule))
+                            <textarea id="textarea" class="textarea form-control" readonly>Response: {{ $schedule }}</textarea>
+                        @elseif(isset($task))
+                            <textarea id="textarea" class="textarea form-control" readonly>Response: {{ $task }}</textarea>
+                        @endif
                     </div>
                 </div>
                 {{-- end Response --}}
@@ -203,7 +209,6 @@
 
     {{-- Link JS --}}
     <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    {{-- <script src="{{ asset('assets/vendor/bootstrap/js/ajaxcompilations.js') }}"></script> --}}
     <script src="{{ asset('assets/vendor/glightbox/js/glightbox.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
@@ -212,28 +217,11 @@
     <script src="{{ asset('assets/js/main.js') }}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+    {{-- AJAX --}}
+    {{-- <script src="{{ asset('assets/vendor/bootstrap/js/ajaxcompilations.js') }}"></script> --}}
+
     {{-- Script --}}
-    <script>
-        var csrfToken = $('meta[name="csrf-token"]').attr("content");
-        $(document).ready(function() {
-            $("#quote").on("click", function(e) {
-                e.preventDefault();
-                $.ajax({
-                    type: "post",
-                    url: "http://localhost:8000/",
-                    data: {
-                        _token: csrfToken,
-                    },
-                    success: function(response) {
-                        $("#textarea").val("Response: " + response);
-                    },
-                    error: function(xhr, status, error) {
-                        console.error(xhr, status, error, );
-                    },
-                });
-            });
-        });
-    </script>
+    <script></script>
 
 </body>
 

@@ -12,30 +12,32 @@ class AutoaiController extends Controller
     {
         if ($request->quote == 'quote') {
             Artisan::call('inspire');
-            trim(Artisan::output());
-            return response()->json();
+            $quote = trim(Artisan::output());
+            return view('welcome', compact('quote'));
         }
     }
 
     public function schedule(Request $request)
     {
-        OpenAI::completions()->create([
+        $scheduleResponse = OpenAI::completions()->create([
             'model' => 'ada',
             'prompt' => $request->schedule,
             'temperature' => 0.5,
-            'max_tokens'=> 200
+            'max_tokens' => 300
         ]);
-        return response()->json();
+        $schedule = $scheduleResponse->toArray()['choices'][0]['text'];
+        return view('welcome', compact('schedule'));
     }
 
     public function task(Request $request)
     {
-        OpenAI::completions()->create([
+        $taskResponse = OpenAI::completions()->create([
             'model' => 'ada',
             'prompt' => $request->task,
             'temperature' => 0.5,
-            'max_tokens'=> 100
+            'max_tokens' => 300
         ]);
-        return response()->json();
+        $task = $taskResponse->toArray()['choices'][0]['text'];
+        return view('welcome', compact('task'));
     }
 }
