@@ -3,6 +3,7 @@
 use App\Http\Controllers\AutoaiController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use RealRashid\SweetAlert\Facades\Alert;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,14 +19,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
-// Route::get('/', function () {
-//     Artisan::call('inspire');
-//     $quote = trim(Artisan::output());
-
-//     // return view('quote', ['quote' => $quote]);
-//     dd($quote);
-// });
 
 Route::post('/quote', [AutoaiController::class,'index'])->name('quote.index');
 Route::post('/schedule', [AutoaiController::class,'schedule'])->name('schedule.random');

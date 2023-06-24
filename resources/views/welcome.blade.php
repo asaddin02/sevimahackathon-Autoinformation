@@ -46,8 +46,8 @@
                     <li class="dropdown"><a href="#"><span>Authentication</span> <i
                                 class="bi bi-chevron-down"></i></a>
                         <ul>
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
+                            <li><a href="#" data-bs-toggle="modal" data-bs-target="#login">Login</a></li>
+                            <li><a href="#" data-bs-toggle="modal" data-bs-target="#register">Register</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -137,7 +137,7 @@
                                 @csrf
                                 <input type="hidden" name="task"
                                     value="Provide me with an ideal daily task schedule for a teacher working from 6 AM to 4 PM">
-                                <button id="newschedule" type="submit"
+                                <button id="task" type="submit"
                                     class="border-0 bg-white portfolio-lightbox preview-link" title="Qutoes"><i
                                         class="bx bx-right-arrow-circle"></i></button>
                             </form>
@@ -151,8 +151,8 @@
                             <p>Click to convert word to pdf</p>
                             <form action="{{ route('convert.file') }}" method="post" enctype="multipart/form-data">
                                 @csrf
-                                <input type="file" name="convert" class="form-control form-control-sm" required>
-                                <button id="newschedule" type="submit"
+                                <input type="file" name="convert" class="" required>
+                                <button id="convert" type="submit"
                                     class="border-0 bg-white portfolio-lightbox preview-link" title="Qutoes"><i
                                         class="bx bx-right-arrow-circle"></i></button>
                             </form>
@@ -204,8 +204,7 @@
     {{-- end Footer --}}
 
     {{-- modal --}}
-    {{-- Modal Login --}}
-    {{-- Modal Register --}}
+    @include('auth.modal')
     {{-- end modal --}}
 
     @include('sweetalert::alert')
@@ -213,6 +212,7 @@
             class="bi bi-arrow-up-short"></i></a>
 
     {{-- Link JS --}}
+    <script src="{{ asset('vendor/sweetalert/sweetalert.all.js') }}"></script>
     <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/glightbox/js/glightbox.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>

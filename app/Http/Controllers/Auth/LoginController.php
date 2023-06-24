@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class LoginController extends Controller
 {
@@ -27,6 +28,16 @@ class LoginController extends Controller
      * @var string
      */
     protected $redirectTo = RouteServiceProvider::HOME;
+
+    public function sendLoginResponse(){
+        Alert::success('Success','Login Success');
+        return redirect()->back();
+    }
+
+    public function sendFailedLoginResponse(){
+        Alert::error('Error','Email or Password is Failed');
+        return redirect()->back();
+    }
 
     /**
      * Create a new controller instance.

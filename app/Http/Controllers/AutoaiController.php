@@ -56,6 +56,7 @@ class AutoaiController extends Controller
         $fileExtension = $file->getClientOriginalExtension();
         if ($fileExtension != 'docx') {
             unlink(public_path($filename));
+            Alert::error('Gagal Convert','Wajib docx');
             return redirect()->back();
         }
         $domPdfPath = base_path('vendor/dompdf/dompdf');
@@ -65,9 +66,9 @@ class AutoaiController extends Controller
         $content = IOFactory::load(public_path($filename));
         $pdfwritter = IOFactory::createWriter($content, 'PDF');
         $pdfwritter->save(public_path('get-pdf.pdf'));
-        response()->download(public_path('get-pdf.pdf'), 'get-pdf.pdf');
+        return response()->download(public_path('get-pdf.pdf'), 'get-pdf.pdf');
+        Alert::success('Berhasil','File berhasil di convert');
         unlink(public_path('get-pdf.pdf'));
-        return back();
-        Alert::error('Gagal Convert','Wajib docx');
+        return redirect()->back();
     }
 }
