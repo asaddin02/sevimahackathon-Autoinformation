@@ -51,19 +51,20 @@ class AutoaiController extends Controller
         $destinationpath = public_path('/');
         $file->move($destinationpath, $filename);
 
+        $fileExtension = $file->getClientOriginalExtension();
+        if ($fileExtension != 'docx') {
+            unlink(public_path($filename));
+            return redirect()->back();
+        }
         $domPdfPath = base_path('vendor/dompdf/dompdf');
         Settings::setPdfRendererPath($domPdfPath);
         Settings::setPdfRendererName('DomPDF');
 
-        try {
-            $content = IOFactory::load(public_path($filename));
-            $pdfwritter = IOFactory::createWriter($content, 'PDF');
-            $pdfwritter->save(public_path('get-pdf.pdf'));
-            return response()->download(public_path('get-pdf.pdf'), 'get-pdf.pdf');
-        } catch (\PhpOffice\PhpWord\Exception\Exception $e) {
-            // Tangani kesalahan saat memuat file
-            return back();
-        }
+        $content = IOFactory::load(public_path($filename));
+        $pdfwritter = IOFactory::createWriter($content, 'PDF');
+        $pdfwritter->save(public_path('get-pdf.pdf'));
+        response()->download(public_path('get-pdf.pdf'), 'get-pdf.pdf');
+        unlink(public_path('get-pdf.pdf'));
         return back();
     }
 }

@@ -151,7 +151,7 @@
                             <p>Click to convert word to pdf</p>
                             <form action="{{ route('convert.file') }}" method="post" enctype="multipart/form-data">
                                 @csrf
-                                <input type="file" name="convert" class="form-control form-control-sm">
+                                <input type="file" name="convert" class="form-control form-control-sm" required>
                                 <button id="newschedule" type="submit"
                                     class="border-0 bg-white portfolio-lightbox preview-link" title="Qutoes"><i
                                         class="bx bx-right-arrow-circle"></i></button>
