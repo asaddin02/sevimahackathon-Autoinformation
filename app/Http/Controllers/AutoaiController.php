@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Artisan;
-use OpenAI\Laravel\Facades\OpenAI;
-use PhpOffice\PhpWord\IOFactory;
 use PhpOffice\PhpWord\Settings;
+use PhpOffice\PhpWord\IOFactory;
+use OpenAI\Laravel\Facades\OpenAI;
+use Illuminate\Support\Facades\Artisan;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AutoaiController extends Controller
 {
@@ -66,5 +68,6 @@ class AutoaiController extends Controller
         response()->download(public_path('get-pdf.pdf'), 'get-pdf.pdf');
         unlink(public_path('get-pdf.pdf'));
         return back();
+        Alert::error('Gagal Convert','Wajib docx');
     }
 }
