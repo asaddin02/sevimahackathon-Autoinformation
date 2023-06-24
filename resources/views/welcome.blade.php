@@ -88,9 +88,9 @@
                 <div class="row">
                     <div class="col-lg-12 d-flex justify-content-center">
                         <ul id="portfolio-flters">
-                            <li data-filter="*" class="filter-active">All</li>
-                            <li data-filter=".filter-quote">Quote</li>
+                            <li data-filter=".filter-quote" class="filter-active">Quote</li>
                             <li data-filter=".filter-schedule">Schedule</li>
+                            <li data-filter=".filter-task">Task</li>
                             <li data-filter=".filter-converter">Converter</li>
                         </ul>
                     </div>
@@ -127,7 +127,7 @@
                             </form>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-md-4 portfolio-item filter-schedule">
+                    <div class="col-lg-6 col-md-4 portfolio-item filter-task">
                         <img src="{{ asset('assets/img/portfolio/portfolio-5.jpg') }}" class="img-fluid"
                             alt="">
                         <div class="portfolio-info">
@@ -147,18 +147,22 @@
                         <img src="{{ asset('assets/img/portfolio/portfolio-6.jpg') }}" class="img-fluid"
                             alt="">
                         <div class="portfolio-info">
-                            <h4>App 3</h4>
-                            <p>App</p>
-                            <a href="{{ asset('assets/img/portfolio/portfolio-6.jpg') }}"
-                                data-gallery="portfolioGallery" class="portfolio-lightbox preview-link"
-                                title="App 3"><i class="bx bx-plus"></i></a>
+                            <h4>Converter</h4>
+                            <p>Click to convert word to pdf</p>
+                            <form action="{{ route('convert.file') }}" method="post" enctype="multipart/form-data">
+                                @csrf
+                                <input type="file" name="convert" class="form-control form-control-sm">
+                                <button id="newschedule" type="submit"
+                                    class="border-0 bg-white portfolio-lightbox preview-link" title="Qutoes"><i
+                                        class="bx bx-right-arrow-circle"></i></button>
+                            </form>
                         </div>
                     </div>
                 </div>
 
                 {{-- Response --}}
                 <div class="row">
-                    <div class="col-lg-12 col-md-6">
+                    <div class="col-lg-12 col-md-4">
                         @if (isset($quote))
                             <textarea id="textarea" class="textarea form-control" readonly>Response: {{ $quote }}</textarea>
                         @elseif(isset($schedule))
