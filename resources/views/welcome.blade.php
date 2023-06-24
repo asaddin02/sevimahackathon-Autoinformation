@@ -9,6 +9,9 @@
     <meta content="" name="description">
     <meta content="" name="keywords">
 
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <!-- Favicons -->
     <link href="{{ asset('assets/img/favicon.png') }}" rel="icon">
     <link href="{{ asset('assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
@@ -59,9 +62,9 @@
         <div class="container">
             <div class="hero-content">
                 <h1>I'm <span class="typed"
-                        data-typed-items="Auto Information, Inspirer,Automated Schedule, Task Assigner, Converter"></span>
+                        data-typed-items="Auto Information, Inspirer,Automated Schedule, Task Manager, Converter"></span>
                 </h1>
-                <p>Inspirer, Automated Schedule, Task Assigner, Converter</p>
+                <p>Inspirer, Automated Schedule, Task Manager, Converter</p>
 
                 <ul class="list-unstyled list-social">
                     <li><a href="#"><i class="bi bi-facebook"></i></a></li>
@@ -86,47 +89,61 @@
                     <div class="col-lg-12 d-flex justify-content-center">
                         <ul id="portfolio-flters">
                             <li data-filter="*" class="filter-active">All</li>
-                            <li data-filter=".filter-app">App</li>
-                            <li data-filter=".filter-card">Card</li>
-                            <li data-filter=".filter-web">Web</li>
+                            <li data-filter=".filter-quote">Quote</li>
+                            <li data-filter=".filter-schedule">Schedule</li>
+                            <li data-filter=".filter-converter">Converter</li>
                         </ul>
                     </div>
                 </div>
                 <div class="row portfolio-container">
-                    <div class="col-lg-6 col-md-4 portfolio-item filter-app">
+                    <div class="col-lg-6 col-md-4 portfolio-item filter-quote">
                         <img src="{{ asset('assets/img/portfolio/portfolio-1.jpg') }}" class="img-fluid"
                             alt="">
                         <div class="portfolio-info">
                             <h4>Qutoes</h4>
                             <p>Click to get quotes</p>
-                            <a href="{{ asset('assets/img/portfolio/portfolio-1.jpg') }}"
-                                data-gallery="portfolioGallery" class="portfolio-lightbox preview-link"
-                                title="Qutoes"><i class="bx bx-right-arrow-circle"></i></a>
+                            <form>
+                                @csrf
+                                <input type="hidden" name="quote" value="quote">
+                                <button id="quotes" type="button"
+                                    class="border-0 bg-white portfolio-lightbox preview-link" title="Qutoes"><i
+                                        class="bx bx-right-arrow-circle"></i></button>
+                            </form>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-md-4 portfolio-item filter-card">
+                    <div class="col-lg-6 col-md-4 portfolio-item filter-schedule">
                         <img src="{{ asset('assets/img/portfolio/portfolio-4.jpg') }}" class="img-fluid"
                             alt="">
                         <div class="portfolio-info">
-                            <h4>Card 2</h4>
-                            <p>Card</p>
-                            <a href="{{ asset('assets/img/portfolio/portfolio-4.jpg') }}"
-                                data-gallery="portfolioGallery" class="portfolio-lightbox preview-link"
-                                title="Card 2"><i class="bx bx-plus"></i></a>
+                            <h4>Automated Schedule</h4>
+                            <p>Click to get new schedule</p>
+                            <form>
+                                @csrf
+                                <input type="hidden" name="schedule"
+                                    value="Provide a random schedule of classes for high school students in Indonesia">
+                                <button id="newschedule" type="button"
+                                    class="border-0 bg-white portfolio-lightbox preview-link" title="Qutoes"><i
+                                        class="bx bx-right-arrow-circle"></i></button>
+                            </form>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-md-4 portfolio-item filter-web">
+                    <div class="col-lg-6 col-md-4 portfolio-item filter-schedule">
                         <img src="{{ asset('assets/img/portfolio/portfolio-5.jpg') }}" class="img-fluid"
                             alt="">
                         <div class="portfolio-info">
-                            <h4>Web 2</h4>
-                            <p>Web</p>
-                            <a href="{{ asset('assets/img/portfolio/portfolio-5.jpg') }}"
-                                data-gallery="portfolioGallery" class="portfolio-lightbox preview-link"
-                                title="Web 2"><i class="bx bx-plus"></i></a>
+                            <h4>Task Manager</h4>
+                            <p>Click to get new daily task</p>
+                            <form>
+                                @csrf
+                                <input type="hidden" name="task"
+                                    value="Provide me with an ideal daily task schedule for a teacher working from 6 AM to 4 PM">
+                                <button id="newschedule" type="button"
+                                    class="border-0 bg-white portfolio-lightbox preview-link" title="Qutoes"><i
+                                        class="bx bx-right-arrow-circle"></i></button>
+                            </form>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-md-4 portfolio-item filter-app">
+                    <div class="col-lg-6 col-md-4 portfolio-item filter-converter">
                         <img src="{{ asset('assets/img/portfolio/portfolio-6.jpg') }}" class="img-fluid"
                             alt="">
                         <div class="portfolio-info">
@@ -186,21 +203,35 @@
 
     {{-- Link JS --}}
     <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    {{-- <script src="{{ asset('assets/vendor/bootstrap/js/ajaxcompilations.js') }}"></script> --}}
     <script src="{{ asset('assets/vendor/glightbox/js/glightbox.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/typed.js/typed.umd.js') }}"></script>
     <script src="{{ asset('assets/vendor/php-email-form/validate.js') }}"></script>
     <script src="{{ asset('assets/js/main.js') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
-        integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     {{-- Script --}}
     <script>
+        var csrfToken = $('meta[name="csrf-token"]').attr("content");
         $(document).ready(function() {
-            var responseText = $('#response').text();
-            $('#myTextarea').val(responseText);
+            $("#quote").on("click", function(e) {
+                e.preventDefault();
+                $.ajax({
+                    type: "post",
+                    url: "http://localhost:8000/",
+                    data: {
+                        _token: csrfToken,
+                    },
+                    success: function(response) {
+                        $("#textarea").val("Response: " + response);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(xhr, status, error, );
+                    },
+                });
+            });
         });
     </script>
 

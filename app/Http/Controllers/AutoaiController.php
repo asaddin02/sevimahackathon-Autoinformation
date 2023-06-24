@@ -10,17 +10,32 @@ class AutoaiController extends Controller
 {
     public function index(Request $request)
     {
-        // $result = OpenAI::completions()->create([
-        //     'model' => 'ada',
-        //     'prompt' => 'Give me inspirational quotes!',
-        //     'temperature' => 0.5,
-        //     'max_tokens'=> 100
-        // ]);
-        // echo $result['choices'][0]['text'];
-        if($request->inspiration){
+        if ($request->quote == 'quote') {
             Artisan::call('inspire');
-            $quote = trim(Artisan::output());
-            dd($quote);
+            trim(Artisan::output());
+            return response()->json();
         }
+    }
+
+    public function schedule(Request $request)
+    {
+        OpenAI::completions()->create([
+            'model' => 'ada',
+            'prompt' => $request->schedule,
+            'temperature' => 0.5,
+            'max_tokens'=> 200
+        ]);
+        return response()->json();
+    }
+
+    public function task(Request $request)
+    {
+        OpenAI::completions()->create([
+            'model' => 'ada',
+            'prompt' => $request->task,
+            'temperature' => 0.5,
+            'max_tokens'=> 100
+        ]);
+        return response()->json();
     }
 }
