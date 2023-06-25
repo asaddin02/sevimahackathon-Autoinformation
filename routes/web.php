@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AutoaiController;
+use App\Http\Controllers\RegisController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -24,6 +25,7 @@ Route::post('/quote', [AutoaiController::class,'index'])->name('quote.index');
 Route::post('/schedule', [AutoaiController::class,'schedule'])->name('schedule.random');
 Route::post('/task', [AutoaiController::class,'task'])->name('task.random');
 Route::post('/convert', [AutoaiController::class,'convert'])->name('convert.file');
+Route::post('/daftar',[RegisController::class,'index'])->name('register.authuser');
 
 Auth::routes();
 
